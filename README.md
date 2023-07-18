@@ -48,7 +48,8 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
      - `address`: The address where the app will listen for incoming requests. (Default: 127.0.0.1)
      - `port`: The port where the app will listen for incoming requests. (Default: 8080)
 
-6. Authenticate with Azure (Service Principal):
+6. Authenticate with Azure: 
+   With a Service Principal
    - Set the following environment variables:
      - `AZURE_TENANT_ID`: The Azure tenant ID.
      - `AZURE_CLIENT_ID`: The Azure client ID.
