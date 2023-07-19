@@ -54,9 +54,11 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
      - `AZURE_TENANT_ID`: The Azure tenant ID.
      - `AZURE_CLIENT_ID`: The Azure client ID.
      - `AZURE_CLIENT_SECRET`: The Azure client secret.
+   - The Service Principal needs the following permissions:
+     - `Storage Blob Data Contributor` for the storage account.
 
 7. Start the app:
-   ```
+   ```bash
    ./workflow-logs-archiver
    ```
 
@@ -68,8 +70,7 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
      - Secret: the value of `WEBHOOK_SECRET` you set in `config.yml`
      - Select the individual events: `Workflow Run`.
    - Under Permissions, select the following:
-     - `Read & Write` for `Workflow`.
-     - `Read-only` for `Repository contents`.
+     - `Read` for `Actions`.
 
 ## Usage
 
