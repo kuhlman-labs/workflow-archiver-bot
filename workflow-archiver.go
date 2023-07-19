@@ -17,7 +17,6 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 	"github.com/google/go-github/v53/github"
-	"github.com/google/uuid"
 	"github.com/gregjones/httpcache"
 	"github.com/palantir/go-githubapp/githubapp"
 	"github.com/pkg/errors"
@@ -165,8 +164,8 @@ func (h *WorkflowHandler) logToAzureBlobStorage(log *http.Response, blobURL, rep
 		return errors.Wrap(err, "failed to create container")
 	}
 
-	// Create a unique name for the blob
-	blobName := fmt.Sprintf("%s-%s.log.gz", time.Now().Format("20060102150405"), uuid.New().String())
+	// Create a unique name for the blob with the prefix being the workflow run ID and timestamp
+	blobName := fmt.Sprintf("%d-%d.log.gz", workflowRunID, time.Now().Unix())
 
 	// Upload to data to blob storage
 	fmt.Printf("Uploading a blob named %s\n", blobName)
