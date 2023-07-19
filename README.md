@@ -50,7 +50,7 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
 
 6. Authenticate with Azure: 
    #### With a Service Principal
-   - Set the following environment variables:
+   - Set the following environment variables on the server where the app will run:
      - `AZURE_TENANT_ID`: The Azure tenant ID.
      - `AZURE_CLIENT_ID`: The Azure client ID.
      - `AZURE_CLIENT_SECRET`: The Azure client secret.
