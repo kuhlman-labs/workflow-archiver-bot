@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"compress/gzip"
@@ -153,7 +154,9 @@ func (h *WorkflowHandler) logToAzureBlobStorage(log *http.Response, blobURL, rep
 	}
 
 	// Create the container
+	// The container name must be lower case
 	containerName := fmt.Sprintf("%s-%s", orgName, repoName)
+	containerName = strings.ToLower(containerName)
 	fmt.Printf("Creating a container named %s\n", containerName)
 	_, err = client.CreateContainer(ctx, containerName, nil)
 	if bloberror.HasCode(err, bloberror.ContainerAlreadyExists) {
