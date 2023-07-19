@@ -27,7 +27,7 @@ import (
 
 type WorkflowHandler struct {
 	githubapp.ClientCreator
-	storageAccountName string
+	StorageAccountName string
 }
 
 type Config struct {
@@ -37,7 +37,7 @@ type Config struct {
 }
 
 type Azure struct {
-	storageAccountName string `yaml:"storage_account_name"`
+	StorageAccountName string `yaml:"storage_account_name"`
 }
 
 type HTTPConfig struct {
@@ -61,7 +61,7 @@ func readConfig(path string) (*Config, error) {
 }
 
 func (h *WorkflowHandler) Handles() []string {
-	return []string{"pull_request"}
+	return []string{"workflow_run"}
 }
 
 func (h *WorkflowHandler) Handle(ctx context.Context, eventType, deliveryID string, payload []byte) error {
@@ -112,7 +112,7 @@ func (h *WorkflowHandler) Handle(ctx context.Context, eventType, deliveryID stri
 		return errors.Wrap(err, "failed to get workflow run logs")
 	}
 
-	blobURL := fmt.Sprintf("https://%s.blob.core.windows.net/", h.storageAccountName)
+	blobURL := fmt.Sprintf("https://%s.blob.core.windows.net/", h.StorageAccountName)
 
 	// Log to Azure Blob Storage
 	err = h.logToAzureBlobStorage(log, blobURL, *event.GetRepo().Name, *event.GetRepo().Owner.Login, *event.WorkflowRun.ID)
@@ -215,7 +215,7 @@ func main() {
 
 	workflowHandler := &WorkflowHandler{
 		ClientCreator:      cc,
-		storageAccountName: config.Azure.storageAccountName,
+		StorageAccountName: config.Azure.StorageAccountName,
 	}
 
 	webhookHandler := githubapp.NewDefaultEventDispatcher(config.Github, workflowHandler)
