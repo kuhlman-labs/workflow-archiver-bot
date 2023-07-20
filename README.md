@@ -16,17 +16,17 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
 
 1. Clone the repository to your local machine:
    ```
-   git clone https://github.com/your-username/workflow-logs-archiver.git
+   git clone https://github.com/kuhlman-labs/workflow-archiver-bot.git
    ```
 
 2. Navigate to the project directory:
    ```
-   cd workflow-logs-archiver
+   cd workflow-logs-archiver-bot
    ```
 
 3. Build the Go executable:
    ```
-   go build
+   go build workflow-archiver.go
    ```
 
 4. Set up a new GitHub App:
@@ -59,7 +59,7 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
 
 7. Start the app:
    ```bash
-   ./workflow-logs-archiver
+   ./workflow-archiver
    ```
 
 8. Configure the GitHub App webhook:
