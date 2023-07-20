@@ -33,9 +33,6 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
    - Go to the [GitHub Developer Settings](https://github.com/settings/apps) page.
    - Click on "New GitHub App".
    - Provide an appropriate name and description for your app.
-   - Set the "Homepage URL" and "User authorization callback URL" to your desired values.
-   - Choose the repositories where you want to use the app.
-   - Set the necessary permissions (e.g., `workflow` for accessing workflow runs).
    - Generate a new private key and save it securely.
 
 5. Configure the app:
@@ -62,15 +59,15 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
    ./workflow-archiver
    ```
 
-8. Configure the GitHub App webhook:
+8. Configure the GitHub App:
    - Go back to the GitHub Developer Settings page.
-   - Under your app's settings, click on "Webhooks".
    - Add a new webhook URL with the following details:
      - Payload URL: `http://<your-app-host>:<port>/api/github/hook`
      - Secret: the value of `WEBHOOK_SECRET` you set in `config.yml`
      - Select the individual events: `Workflow Run`.
    - Under Permissions, select the following:
      - `Read` for `Actions`.
+   - Install the app on the orgs/repositories where you want to archive workflow logs.     
 
 ## Usage
 
