@@ -10,7 +10,7 @@ require (
 	github.com/palantir/go-githubapp v0.18.0
 	github.com/pkg/errors v0.9.1
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475
-	github.com/rs/zerolog v1.29.1
+	github.com/rs/zerolog v1.30.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
