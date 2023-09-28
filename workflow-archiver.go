@@ -89,14 +89,8 @@ func (h *WorkflowHandler) Handle(ctx context.Context, eventType, deliveryID stri
 		return err
 	}
 
-	// Get the workflow run
-	workflowRun, _, err := client.Actions.GetWorkflowRunByID(ctx, *event.GetRepo().Owner.Login, *event.GetRepo().Name, *event.WorkflowRun.ID)
-	if err != nil {
-		return errors.Wrap(err, "failed to get workflow run")
-	}
-
 	// Check if workflow run is successful
-	if *workflowRun.Conclusion != "success" {
+	if *event.WorkflowRun.Conclusion != "success" {
 		zerolog.Ctx(ctx).Info().Msgf("Workflow run %d is not successful", *event.WorkflowRun.ID)
 	}
 
