@@ -1,9 +1,11 @@
 # Workflow Logs Archiver
 
 ## Description
+
 The Workflow Logs Archiver is a GitHub App written in Go that listens for completed workflow runs in a GitHub repository. Once a workflow run completes, the app retrieves the logs, compresses them, and uploads the compressed logs to an Azure blob account. This helps to centralize and store workflow logs in an easily accessible and scalable manner.
 
 ## Features
+
 - Automatic retrieval and archiving of workflow logs.
 - Compression of logs to reduce storage requirements.
 - Seamless integration with GitHub repositories.
@@ -15,17 +17,20 @@ The Workflow Logs Archiver is a GitHub App written in Go that listens for comple
 To install and use the Workflow Logs Archiver GitHub App, follow these steps:
 
 1. Clone the repository to your local machine:
-   ```
+
+   ```sh
    git clone https://github.com/kuhlman-labs/workflow-archiver-bot.git
    ```
 
 2. Navigate to the project directory:
-   ```
+
+   ```sh
    cd workflow-logs-archiver-bot
    ```
 
 3. Build the Go executable:
-   ```
+
+   ```sh
    go build workflow-archiver.go
    ```
 
@@ -45,21 +50,28 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
      - `address`: The address where the app will listen for incoming requests. (Default: 127.0.0.1)
      - `port`: The port where the app will listen for incoming requests. (Default: 8080)
 
-6. Authenticate with Azure: 
+6. Authenticate with Azure:
+
    #### With a Service Principal
-   - Set the following environment variables on the server where the app will run:
+
+   - Copy `setenv.sh.orig` to `setenv.sh` and fill out the values for authentication.
      - `AZURE_TENANT_ID`: The Azure tenant ID.
      - `AZURE_CLIENT_ID`: The Azure client ID.
      - `AZURE_CLIENT_SECRET`: The Azure client secret.
-   - The Service Principal needs the following permissions:
+   - Run `. ./setenv.sh` to set the environment variables.
+   - The [Service Principal](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=delegate-condition) needs the following permissions:
      - `Storage Blob Data Contributor` for the storage account.
 
+> Note. [How to Create a Service Principal](https://learn.microsoft.com/en-us/purview/create-service-principal-azure)
+
 7. Start the app:
+
    ```bash
    ./workflow-archiver
    ```
 
 8. Configure the GitHub App:
+
    - Go back to the GitHub Developer Settings page.
    - Add a new webhook URL with the following details:
      - Payload URL: `http://<your-app-host>:<port>/api/github/hook`
@@ -67,7 +79,7 @@ To install and use the Workflow Logs Archiver GitHub App, follow these steps:
      - Select the individual events: `Workflow Run`.
    - Under Permissions, select the following:
      - `Read` for `Actions`.
-   - Install the app on the orgs/repositories where you want to archive workflow logs.     
+   - Install the app on the orgs/repositories where you want to archive workflow logs.
 
 ## Usage
 
